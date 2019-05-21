@@ -59,8 +59,7 @@ create_aoss_meteo_makefile <- function(makefile, task_plan, remake_file) {
     packages=c('dplyr', 'scipiper', 'readr', 'ncdf4'),
     sources=c(
       '6_drivers/src/aoss_solar_utils.R'),
-    file_extensions=c('feather','ind'),
-    ind_complete=TRUE)
+    file_extensions=c('feather','ind'))
 }
 
 combine_solrad_files <- function(filepath){
@@ -106,7 +105,7 @@ combine_nldas_files <- function(filepath, ...){
 
   NLDAS_start <- as.POSIXct('1979-01-01 13:00', tz = "UTC")
   all_time_vec <- seq(NLDAS_start, by = 'hour', to = Sys.time())
-  file_times <- c(1, 346849)
+  file_times <- c(1, 351501)
   drivers_in <- data.frame(time = all_time_vec[file_times[1]:file_times[2]], stringsAsFactors = FALSE)
 
   feather_filepaths <- c(...)
@@ -134,7 +133,7 @@ combine_nldas_files <- function(filepath, ...){
   feather::write_feather(drivers_out, filepath)
 }
 
-merge_aoss_nldas_meteo <- function(filepath, nldas_filepath, radiation_filepath, weather_filepath){
+merge_aoss_nldas_meteo <- function(filepath, nldas_filepath, radiation_filepath, weather_filepath, start_date_string){
 
   radiation_data <- read_feather(radiation_filepath)
   weather_data <- read_feather(weather_filepath)
@@ -149,12 +148,12 @@ merge_aoss_nldas_meteo <- function(filepath, nldas_filepath, radiation_filepath,
            WindSpeed = ifelse(!is.na(WindSpeed.y) & !WindSpeed_qc, WindSpeed.y, WindSpeed.x)) %>%
     select(time,ShortWave,LongWave,AirTemp,RelHum,WindSpeed,Rain,Snow) %>%
     arrange(time) %>%
-    filter(time < as.Date("2018-07-27"), time >= as.Date("2009-01-01")) # HARDCODED - this is the end of our NLDAS pull and beginning of station data
+    filter(time < as.Date("2019-01-01"), time >= as.Date(start_date_string)) # HARDCODED - this is the end of our NLDAS pull and beginning of station data
 
   readr::write_csv(x = meteo_data, path = filepath)
 }
 
-merge_airport_nldas_meteo <- function(filepath, nldas_filepath, airport_filepath){
+merge_airport_nldas_meteo <- function(filepath, nldas_filepath, airport_filepath, start_date_string){
 
   airport_data <- read_feather(airport_filepath)
 
@@ -168,7 +167,7 @@ merge_airport_nldas_meteo <- function(filepath, nldas_filepath, airport_filepath
            WindSpeed = ifelse(!is.na(WindSpeed.y), WindSpeed.y, WindSpeed.x)) %>%
     select(time,ShortWave,LongWave,AirTemp,RelHum,WindSpeed,Rain,Snow) %>%
     arrange(time) %>%
-    filter(time < as.Date("2018-07-27"), time >= as.Date("2007-01-01")) # HARDCODED - this is the end of our NLDAS pull and beginning of station data
+    filter(time < as.Date("2019-01-01"), time >= as.Date(start_date_string)) # HARDCODED - this is the end of our NLDAS pull and beginning of station data
 
   readr::write_csv(x = meteo_data, path = filepath)
 }

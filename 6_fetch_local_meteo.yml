@@ -99,10 +99,10 @@ targets:
       '7_drivers_munge/sparkling_out/airport_meteo.feather',
       start_date_string = I('1979-04-01'))
 
-  '../lake_modeling/data_imports/mendota_experiments/mendota_meteo.feather':
-    command: subset_training_meteo(target_name, '7_drivers_munge/mendota_out/mendota_local_meteo.csv', I('1979-04-01'), I('2018-12-31'))
+  #'../lake_modeling/data_imports/mendota_experiments/mendota_meteo.feather': is now in '7_PGML_experiments.yml'
+  #  command: subset_training_meteo(target_name, '7_drivers_munge/mendota_out/mendota_local_meteo.csv', I('1979-04-01'), I('2018-12-31'))
 
-  '../lake_modeling/data_imports/sparkling_experiments/sparkling_meteo.feather':
-    command: subset_training_meteo(target_name, '7_drivers_munge/sparkling_out/sparkling_local_meteo.csv', I('1979-04-01'), I('2018-12-31'))
+  #'../lake_modeling/data_imports/sparkling_experiments/sparkling_meteo.feather':  is now in '7_PGML_experiments.yml'
+  #  command: subset_training_meteo(target_name, '7_drivers_munge/sparkling_out/sparkling_local_meteo.csv', I('1979-04-01'), I('2018-12-31'))
 
 

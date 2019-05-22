@@ -91,48 +91,25 @@ targets:
     command: subset_GLM_meteo(target_name, '7_drivers_munge/sparkling_out/sparkling_local_meteo.csv', date_range)
 
 # -- ME similar --
-  '../lake_modeling/data_imports/mendota_similar_experiments/mendota_similar_training_500_profiles_experiment_01.feather':
-    command: build_sparse_training(target_name, cleaned_me_buoy, chunksize = similar_training_chunksize)
+  '../lake_modeling/data_imports/mendota_sparse_experiments/experiment_01/mendota_training_500profiles_experiment_01.feather':
+    command: build_sparse_training_from_existing(target_name,
+      training_filepath = '../lake_modeling/data_imports/mendota_sparse_experiments/experiment_01/mendota_training_980profiles_experiment_01.feather')
 
-  '../lake_modeling/data_imports/mendota_similar_experiments/mendota_similar_test_experiment_01.feather':
-    command: subset_similar_test(target_name, cleaned_me_buoy, '../lake_modeling/data_imports/mendota_similar_experiments/mendota_similar_training_500_profiles_experiment_01.feather')
+  '../lake_modeling/data_imports/mendota_sparse_experiments/experiment_02/mendota_training_500profiles_experiment_02.feather':
+    command: build_sparse_training_from_existing(target_name,
+      training_filepath = '../lake_modeling/data_imports/mendota_sparse_experiments/experiment_02/mendota_training_980profiles_experiment_02.feather')
 
-  '../lake_modeling/data_imports/mendota_similar_experiments/mendota_similar_training_500_profiles_experiment_02.feather':
-    command: build_sparse_training(target_name, cleaned_me_buoy, chunksize = similar_training_chunksize)
+  '../lake_modeling/data_imports/mendota_sparse_experiments/experiment_03/mendota_training_500profiles_experiment_03.feather':
+    command: build_sparse_training_from_existing(target_name,
+      training_filepath = '../lake_modeling/data_imports/mendota_sparse_experiments/experiment_03/mendota_training_980profiles_experiment_03.feather')
 
-  '../lake_modeling/data_imports/mendota_similar_experiments/mendota_similar_test_experiment_02.feather':
-    command: subset_similar_test(target_name, cleaned_me_buoy, '../lake_modeling/data_imports/mendota_similar_experiments/mendota_similar_training_500_profiles_experiment_02.feather')
+  '../lake_modeling/data_imports/mendota_sparse_experiments/experiment_04/mendota_training_500profiles_experiment_04.feather':
+    command: build_sparse_training_from_existing(target_name,
+      training_filepath = '../lake_modeling/data_imports/mendota_sparse_experiments/experiment_04/mendota_training_980profiles_experiment_04.feather')
 
-  '../lake_modeling/data_imports/mendota_similar_experiments/mendota_similar_training_500_profiles_experiment_03.feather':
-    command: build_sparse_training(target_name, cleaned_me_buoy, chunksize = similar_training_chunksize)
-
-  '../lake_modeling/data_imports/mendota_similar_experiments/mendota_similar_test_experiment_03.feather':
-    command: subset_similar_test(target_name, cleaned_me_buoy, '../lake_modeling/data_imports/mendota_similar_experiments/mendota_similar_training_500_profiles_experiment_03.feather')
-
-  '../lake_modeling/data_imports/mendota_similar_experiments/mendota_similar_training_500_profiles_experiment_04.feather':
-    command: build_sparse_training(target_name, cleaned_me_buoy, chunksize = similar_training_chunksize)
-
-  '../lake_modeling/data_imports/mendota_similar_experiments/mendota_similar_test_experiment_04.feather':
-    command: subset_similar_test(target_name, cleaned_me_buoy, '../lake_modeling/data_imports/mendota_similar_experiments/mendota_similar_training_500_profiles_experiment_04.feather')
-
-  '../lake_modeling/data_imports/mendota_similar_experiments/mendota_similar_training_500_profiles_experiment_05.feather':
-    command: build_sparse_training(target_name, cleaned_me_buoy, chunksize = similar_training_chunksize)
-
-  '../lake_modeling/data_imports/mendota_similar_experiments/mendota_similar_test_experiment_05.feather':
-    command: subset_similar_test(target_name, cleaned_me_buoy, '../lake_modeling/data_imports/mendota_similar_experiments/mendota_similar_training_500_profiles_experiment_05.feather')
-
-  '../lake_modeling/data_imports/mendota_similar_experiments/mendota_similar_overview.png':
-    command: plot_similar_test_train(target_name, xlim_char = date_range,
-      '../lake_modeling/data_imports/mendota_similar_experiments/mendota_similar_training_500_profiles_experiment_01.feather',
-      '../lake_modeling/data_imports/mendota_similar_experiments/mendota_similar_test_experiment_01.feather',
-      '../lake_modeling/data_imports/mendota_similar_experiments/mendota_similar_training_500_profiles_experiment_02.feather',
-      '../lake_modeling/data_imports/mendota_similar_experiments/mendota_similar_test_experiment_02.feather',
-      '../lake_modeling/data_imports/mendota_similar_experiments/mendota_similar_training_500_profiles_experiment_03.feather',
-      '../lake_modeling/data_imports/mendota_similar_experiments/mendota_similar_test_experiment_03.feather',
-      '../lake_modeling/data_imports/mendota_similar_experiments/mendota_similar_training_500_profiles_experiment_04.feather',
-      '../lake_modeling/data_imports/mendota_similar_experiments/mendota_similar_test_experiment_04.feather',
-      '../lake_modeling/data_imports/mendota_similar_experiments/mendota_similar_training_500_profiles_experiment_05.feather',
-      '../lake_modeling/data_imports/mendota_similar_experiments/mendota_similar_test_experiment_05.feather')
+  '../lake_modeling/data_imports/mendota_sparse_experiments/experiment_05/mendota_training_500profiles_experiment_05.feather':
+    command: build_sparse_training_from_existing(target_name,
+      training_filepath = '../lake_modeling/data_imports/mendota_sparse_experiments/experiment_05/mendota_training_980profiles_experiment_05.feather')
 
 # -- ME season --
   '../lake_modeling/data_imports/mendota_season_experiments/mendota_season_training_500_profiles_experiment_01.feather':
@@ -190,49 +167,22 @@ targets:
       '../lake_modeling/data_imports/mendota_year_experiments/mendota_year_training_500_profiles_experiment_04.feather',
       '../lake_modeling/data_imports/mendota_year_experiments/mendota_year_training_500_profiles_experiment_05.feather')
 
+
 # -- SP similar --
   '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_training_500_profiles_experiment_01.feather':
-    command: build_sparse_training(target_name, cleaned_sp_buoy, chunksize = similar_training_chunksize)
-
-  '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_test_experiment_01.feather':
-    command: subset_similar_test(target_name, cleaned_sp_buoy, '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_training_500_profiles_experiment_01.feather')
+    command: build_sparse_training(target_name, "../lake_modeling/data_imports/sparkling_sparse_experiments/experiment_01/sparkling_alltrain_experiment_01.feather", chunksize = season_training_chunksize)
 
   '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_training_500_profiles_experiment_02.feather':
-    command: build_sparse_training(target_name, cleaned_sp_buoy, chunksize = similar_training_chunksize)
-
-  '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_test_experiment_02.feather':
-    command: subset_similar_test(target_name, cleaned_sp_buoy, '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_training_500_profiles_experiment_02.feather')
+    command: build_sparse_training(target_name, "../lake_modeling/data_imports/sparkling_sparse_experiments/experiment_02/sparkling_alltrain_experiment_02.feather", chunksize = season_training_chunksize)
 
   '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_training_500_profiles_experiment_03.feather':
-    command: build_sparse_training(target_name, cleaned_sp_buoy, chunksize = similar_training_chunksize)
-
-  '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_test_experiment_03.feather':
-    command: subset_similar_test(target_name, cleaned_sp_buoy, '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_training_500_profiles_experiment_03.feather')
+    command: build_sparse_training(target_name, "../lake_modeling/data_imports/sparkling_sparse_experiments/experiment_03/sparkling_alltrain_experiment_03.feather", chunksize = season_training_chunksize)
 
   '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_training_500_profiles_experiment_04.feather':
-    command: build_sparse_training(target_name, cleaned_sp_buoy, chunksize = similar_training_chunksize)
-
-  '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_test_experiment_04.feather':
-    command: subset_similar_test(target_name, cleaned_sp_buoy, '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_training_500_profiles_experiment_04.feather')
+    command: build_sparse_training(target_name, "../lake_modeling/data_imports/sparkling_sparse_experiments/experiment_04/sparkling_alltrain_experiment_04.feather", chunksize = season_training_chunksize)
 
   '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_training_500_profiles_experiment_05.feather':
-    command: build_sparse_training(target_name, cleaned_sp_buoy, chunksize = similar_training_chunksize)
-
-  '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_test_experiment_05.feather':
-    command: subset_similar_test(target_name, cleaned_sp_buoy, '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_training_500_profiles_experiment_05.feather')
-
-  '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_overview.png':
-    command: plot_similar_test_train(target_name, xlim_char = date_range,
-      '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_training_500_profiles_experiment_01.feather',
-      '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_test_experiment_01.feather',
-      '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_training_500_profiles_experiment_02.feather',
-      '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_test_experiment_02.feather',
-      '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_training_500_profiles_experiment_03.feather',
-      '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_test_experiment_03.feather',
-      '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_training_500_profiles_experiment_04.feather',
-      '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_test_experiment_04.feather',
-      '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_training_500_profiles_experiment_05.feather',
-      '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_test_experiment_05.feather')
+    command: build_sparse_training(target_name, "../lake_modeling/data_imports/sparkling_sparse_experiments/experiment_05/sparkling_alltrain_experiment_05.feather", chunksize = season_training_chunksize)
 
 # -- SP season --
   '../lake_modeling/data_imports/sparkling_season_experiments/sparkling_season_training_500_profiles_experiment_01.feather':

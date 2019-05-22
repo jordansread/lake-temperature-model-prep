@@ -4,16 +4,37 @@ subset_similar_test <- function(filepath, buoy_data, train_filepath){
     feather::write_feather(path = filepath)
 }
 
+
+build_sparse_training_from_existing <- function(filepath, training_filepath){
+  details <- basename(filepath) %>% strsplit('[_]') %>% .[[1]]
+  exp_n <- tail(details,1) %>% strsplit('[.]') %>% .[[1]] %>% .[1]
+  prof_n <- gsub("[^0-9.-]", "", details[3]) %>% as.numeric()
+
+  existing_training <- feather::read_feather(training_filepath)
+  un_dates <- existing_training$DateTime %>% unique
+
+  set.seed(42 + as.numeric(exp_n))
+
+  use_dates <- sample(un_dates, size = prof_n, replace = FALSE)
+
+  filter(existing_training, DateTime %in% use_dates) %>%
+    feather::write_feather(path = filepath)
+
+}
+
 build_sparse_training <- function(filepath, buoy_data, chunksize){
   details <- basename(filepath) %>% strsplit('[_]') %>% .[[1]]
   exp_n <- tail(details,1) %>% strsplit('[.]') %>% .[[1]] %>% .[1]
   prof_n <- as.numeric(details[4])
 
-
+  if (class(buoy_data) != 'data.frame'){
+    buoy_data <- feather::read_feather(buoy_data)
+  }
 
   un_dates <- buoy_data %>% pull(DateTime) %>% unique
 
   un_dt_resample <- data.frame(date = un_dates, train = FALSE)
+
   set.seed(42 + as.numeric(exp_n))
   while (sum(un_dt_resample$train) + chunksize < prof_n){
     good_sample <- FALSE

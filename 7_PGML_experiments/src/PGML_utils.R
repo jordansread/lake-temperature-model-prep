@@ -22,45 +22,35 @@ build_sparse_training_from_existing <- function(filepath, training_filepath){
 
 }
 
-build_sparse_training <- function(filepath, buoy_data, chunksize){
+build_sparse_training <- function(filepath, buoy_data, chunksize, remove_chunks){
   details <- basename(filepath) %>% strsplit('[_]') %>% .[[1]]
   exp_n <- tail(details,1) %>% strsplit('[.]') %>% .[[1]] %>% .[1]
   prof_n <- as.numeric(details[4])
 
-  if (class(buoy_data) != 'data.frame'){
+
+  if (!'data.frame' %in% class(buoy_data)){
     buoy_data <- feather::read_feather(buoy_data)
   }
 
   un_dates <- buoy_data %>% pull(DateTime) %>% unique
 
-  un_dt_resample <- data.frame(date = un_dates, train = FALSE)
+  un_dt_resample <- data.frame(date = un_dates, remove = FALSE)
 
   set.seed(42 + as.numeric(exp_n))
-  while (sum(un_dt_resample$train) + chunksize < prof_n){
+
+  for (i in seq_len(remove_chunks)){
     good_sample <- FALSE
     while (!good_sample){
       start_i <- sample(1:nrow(un_dt_resample), 1)
       end_i <- start_i + chunksize - 1
-      if (end_i <= nrow(un_dt_resample) & !any(un_dt_resample$train[start_i:end_i])){
+      if (end_i <= nrow(un_dt_resample) & !any(un_dt_resample$remove[start_i:end_i])){
         good_sample = TRUE
-        un_dt_resample$train[start_i:end_i] <- TRUE
+        un_dt_resample$remove[start_i:end_i] <- TRUE
       }
     }
   }
 
-  # now get the rest, which will be smaller or equal to chunksize
-  chunksize <- prof_n - sum(un_dt_resample$train)
-  good_sample <- FALSE
-  while (!good_sample){
-    start_i <- sample(1:nrow(un_dt_resample), 1)
-    end_i <- start_i + chunksize - 1
-    if (end_i <= nrow(un_dt_resample) & !any(un_dt_resample$train[start_i:end_i])){
-      good_sample = TRUE
-      un_dt_resample$train[start_i:end_i] <- TRUE
-    }
-  }
-
-  buoy_data %>% filter(DateTime %in% un_dt_resample$date[un_dt_resample$train]) %>%
+  buoy_data %>% filter(DateTime %in% sample(un_dt_resample$date[!un_dt_resample$remove], size = prof_n, replace = FALSE)) %>%
     feather::write_feather(path = filepath)
 }
 

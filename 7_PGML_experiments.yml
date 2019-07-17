@@ -72,6 +72,9 @@ targets:
   similar_training_chunksize:
     command: I(60)
 
+  remove_chunks:
+    command: I(3)
+
   year_test_sp:
     command: filter_year(cleaned_sp_buoy, include = test_year)
 
@@ -113,19 +116,19 @@ targets:
 
 # -- ME season --
   '../lake_modeling/data_imports/mendota_season_experiments/mendota_season_training_500_profiles_experiment_01.feather':
-    command: build_sparse_training(target_name, season_train_me, chunksize = season_training_chunksize)
+    command: build_sparse_training(target_name, season_train_me, chunksize = season_training_chunksize, remove_chunks = remove_chunks)
 
   '../lake_modeling/data_imports/mendota_season_experiments/mendota_season_training_500_profiles_experiment_02.feather':
-    command: build_sparse_training(target_name, season_train_me, chunksize = season_training_chunksize)
+    command: build_sparse_training(target_name, season_train_me, chunksize = season_training_chunksize, remove_chunks = remove_chunks)
 
   '../lake_modeling/data_imports/mendota_season_experiments/mendota_season_training_500_profiles_experiment_03.feather':
-    command: build_sparse_training(target_name, season_train_me, chunksize = season_training_chunksize)
+    command: build_sparse_training(target_name, season_train_me, chunksize = season_training_chunksize, remove_chunks = remove_chunks)
 
   '../lake_modeling/data_imports/mendota_season_experiments/mendota_season_training_500_profiles_experiment_04.feather':
-    command: build_sparse_training(target_name, season_train_me, chunksize = season_training_chunksize)
+    command: build_sparse_training(target_name, season_train_me, chunksize = season_training_chunksize, remove_chunks = remove_chunks)
 
   '../lake_modeling/data_imports/mendota_season_experiments/mendota_season_training_500_profiles_experiment_05.feather':
-    command: build_sparse_training(target_name, season_train_me, chunksize = season_training_chunksize)
+    command: build_sparse_training(target_name, season_train_me, chunksize = season_training_chunksize, remove_chunks = remove_chunks)
 
   '../lake_modeling/data_imports/mendota_season_experiments/mendota_season_test.feather':
     command: write_feather(season_test_me, target_name)
@@ -141,19 +144,19 @@ targets:
 
 # -- ME year --
   '../lake_modeling/data_imports/mendota_year_experiments/mendota_year_training_500_profiles_experiment_01.feather':
-    command: build_sparse_training(target_name, year_train_me, chunksize = season_training_chunksize)
+    command: build_sparse_training(target_name, year_train_me, chunksize = season_training_chunksize, remove_chunks = remove_chunks)
 
   '../lake_modeling/data_imports/mendota_year_experiments/mendota_year_training_500_profiles_experiment_02.feather':
-    command: build_sparse_training(target_name, year_train_me, chunksize = season_training_chunksize)
+    command: build_sparse_training(target_name, year_train_me, chunksize = season_training_chunksize, remove_chunks = remove_chunks)
 
   '../lake_modeling/data_imports/mendota_year_experiments/mendota_year_training_500_profiles_experiment_03.feather':
-    command: build_sparse_training(target_name, year_train_me, chunksize = season_training_chunksize)
+    command: build_sparse_training(target_name, year_train_me, chunksize = season_training_chunksize, remove_chunks = remove_chunks)
 
   '../lake_modeling/data_imports/mendota_year_experiments/mendota_year_training_500_profiles_experiment_04.feather':
-    command: build_sparse_training(target_name, year_train_me, chunksize = season_training_chunksize)
+    command: build_sparse_training(target_name, year_train_me, chunksize = season_training_chunksize, remove_chunks = remove_chunks)
 
   '../lake_modeling/data_imports/mendota_year_experiments/mendota_year_training_500_profiles_experiment_05.feather':
-    command: build_sparse_training(target_name, year_train_me, chunksize = season_training_chunksize)
+    command: build_sparse_training(target_name, year_train_me, chunksize = season_training_chunksize, remove_chunks = remove_chunks)
 
   '../lake_modeling/data_imports/mendota_year_experiments/mendota_year_test.feather':
     command: write_feather(year_test_me, target_name)
@@ -170,35 +173,40 @@ targets:
 
 # -- SP similar --
   '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_training_500_profiles_experiment_01.feather':
-    command: build_sparse_training(target_name, "../lake_modeling/data_imports/sparkling_sparse_experiments/experiment_01/sparkling_alltrain_experiment_01.feather", chunksize = season_training_chunksize)
+    command: build_sparse_training(target_name, "../lake_modeling/data_imports/sparkling_sparse_experiments/experiment_01/sparkling_alltrain_experiment_01.feather",
+      chunksize = season_training_chunksize, remove_chunks = I(0))
 
   '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_training_500_profiles_experiment_02.feather':
-    command: build_sparse_training(target_name, "../lake_modeling/data_imports/sparkling_sparse_experiments/experiment_02/sparkling_alltrain_experiment_02.feather", chunksize = season_training_chunksize)
+    command: build_sparse_training(target_name, "../lake_modeling/data_imports/sparkling_sparse_experiments/experiment_02/sparkling_alltrain_experiment_02.feather",
+      chunksize = season_training_chunksize, remove_chunks = I(0))
 
   '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_training_500_profiles_experiment_03.feather':
-    command: build_sparse_training(target_name, "../lake_modeling/data_imports/sparkling_sparse_experiments/experiment_03/sparkling_alltrain_experiment_03.feather", chunksize = season_training_chunksize)
+    command: build_sparse_training(target_name, "../lake_modeling/data_imports/sparkling_sparse_experiments/experiment_03/sparkling_alltrain_experiment_03.feather",
+      chunksize = season_training_chunksize, remove_chunks = I(0))
 
   '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_training_500_profiles_experiment_04.feather':
-    command: build_sparse_training(target_name, "../lake_modeling/data_imports/sparkling_sparse_experiments/experiment_04/sparkling_alltrain_experiment_04.feather", chunksize = season_training_chunksize)
+    command: build_sparse_training(target_name, "../lake_modeling/data_imports/sparkling_sparse_experiments/experiment_04/sparkling_alltrain_experiment_04.feather",
+      chunksize = season_training_chunksize, remove_chunks = I(0))
 
   '../lake_modeling/data_imports/sparkling_similar_experiments/sparkling_similar_training_500_profiles_experiment_05.feather':
-    command: build_sparse_training(target_name, "../lake_modeling/data_imports/sparkling_sparse_experiments/experiment_05/sparkling_alltrain_experiment_05.feather", chunksize = season_training_chunksize)
+    command: build_sparse_training(target_name, "../lake_modeling/data_imports/sparkling_sparse_experiments/experiment_05/sparkling_alltrain_experiment_05.feather",
+      chunksize = season_training_chunksize, remove_chunks = I(0))
 
 # -- SP season --
   '../lake_modeling/data_imports/sparkling_season_experiments/sparkling_season_training_500_profiles_experiment_01.feather':
-    command: build_sparse_training(target_name, season_train_sp, chunksize = season_training_chunksize)
+    command: build_sparse_training(target_name, season_train_sp, chunksize = season_training_chunksize, remove_chunks = remove_chunks)
 
   '../lake_modeling/data_imports/sparkling_season_experiments/sparkling_season_training_500_profiles_experiment_02.feather':
-    command: build_sparse_training(target_name, season_train_sp, chunksize = season_training_chunksize)
+    command: build_sparse_training(target_name, season_train_sp, chunksize = season_training_chunksize, remove_chunks = remove_chunks)
 
   '../lake_modeling/data_imports/sparkling_season_experiments/sparkling_season_training_500_profiles_experiment_03.feather':
-    command: build_sparse_training(target_name, season_train_sp, chunksize = season_training_chunksize)
+    command: build_sparse_training(target_name, season_train_sp, chunksize = season_training_chunksize, remove_chunks = remove_chunks)
 
   '../lake_modeling/data_imports/sparkling_season_experiments/sparkling_season_training_500_profiles_experiment_04.feather':
-    command: build_sparse_training(target_name, season_train_sp, chunksize = season_training_chunksize)
+    command: build_sparse_training(target_name, season_train_sp, chunksize = season_training_chunksize, remove_chunks = remove_chunks)
 
   '../lake_modeling/data_imports/sparkling_season_experiments/sparkling_season_training_500_profiles_experiment_05.feather':
-    command: build_sparse_training(target_name, season_train_sp, chunksize = season_training_chunksize)
+    command: build_sparse_training(target_name, season_train_sp, chunksize = season_training_chunksize, remove_chunks = remove_chunks)
 
   '../lake_modeling/data_imports/sparkling_season_experiments/sparkling_season_test.feather':
     command: write_feather(season_test_sp, target_name)
@@ -214,19 +222,19 @@ targets:
 
 # -- SP year --
   '../lake_modeling/data_imports/sparkling_year_experiments/sparkling_year_training_500_profiles_experiment_01.feather':
-    command: build_sparse_training(target_name, year_train_sp, chunksize = season_training_chunksize)
+    command: build_sparse_training(target_name, year_train_sp, chunksize = season_training_chunksize, remove_chunks = remove_chunks)
 
   '../lake_modeling/data_imports/sparkling_year_experiments/sparkling_year_training_500_profiles_experiment_02.feather':
-    command: build_sparse_training(target_name, year_train_sp, chunksize = season_training_chunksize)
+    command: build_sparse_training(target_name, year_train_sp, chunksize = season_training_chunksize, remove_chunks = remove_chunks)
 
   '../lake_modeling/data_imports/sparkling_year_experiments/sparkling_year_training_500_profiles_experiment_03.feather':
-    command: build_sparse_training(target_name, year_train_sp, chunksize = season_training_chunksize)
+    command: build_sparse_training(target_name, year_train_sp, chunksize = season_training_chunksize, remove_chunks = remove_chunks)
 
   '../lake_modeling/data_imports/sparkling_year_experiments/sparkling_year_training_500_profiles_experiment_04.feather':
-    command: build_sparse_training(target_name, year_train_sp, chunksize = season_training_chunksize)
+    command: build_sparse_training(target_name, year_train_sp, chunksize = season_training_chunksize, remove_chunks = remove_chunks)
 
   '../lake_modeling/data_imports/sparkling_year_experiments/sparkling_year_training_500_profiles_experiment_05.feather':
-    command: build_sparse_training(target_name, year_train_sp, chunksize = season_training_chunksize)
+    command: build_sparse_training(target_name, year_train_sp, chunksize = season_training_chunksize, remove_chunks = remove_chunks)
 
   '../lake_modeling/data_imports/sparkling_year_experiments/sparkling_year_test.feather':
     command: write_feather(year_test_sp, target_name)

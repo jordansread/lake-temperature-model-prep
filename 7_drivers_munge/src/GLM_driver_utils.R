@@ -9,7 +9,7 @@ calc_cell_group_files <- function(grid_cells, time_range, ind_dir){
   data.frame(variable = grid_cells$variables) %>%
     mutate(filename = create_cellgroup_filename(t0 = time_range[1], t1 = time_range[2], variable = variable, dirname = ind_dir)) %>%
     mutate(hash = sc_indicate("", data_file = filename)) %>% # have to hash, otherwise they will look unchanged
-    select(filename, hash)
+    dplyr::select(filename, hash)
 }
 
 calc_driver_files <- function(cell_group_table, dirname){
@@ -140,12 +140,12 @@ feathers_to_driver_file <- function(filepath, cell_group_table){
            RelHum = 100*spfh2m/qsat(AirTemp, pressfc*0.01),
            Rain = apcpsfc*24/1000) %>%
     mutate(Snow = ifelse(AirTemp < 0, Rain*10, 0), Rain = ifelse(AirTemp < 0, 0, Rain)) %>% #convert to m/day rate)
-    select(time, ShortWave, LongWave, AirTemp, RelHum, WindSpeed, Rain, Snow) %>% # now downsample?
+    dplyr::select(time, ShortWave, LongWave, AirTemp, RelHum, WindSpeed, Rain, Snow) %>% # now downsample?
     mutate(date = lubridate::as_date(time)) %>% group_by(date) %>%
     summarize(ShortWave = mean(ShortWave), LongWave = mean(LongWave),
               AirTemp = mean(AirTemp), RelHum = mean(RelHum),
               WindSpeed = mean(WindSpeed^3)^(1/3), Rain = mean(Rain), Snow = mean(Snow), n = length(time)) %>%
-    filter(n == 24) %>% rename(time = date) %>% select(-n)
+    filter(n == 24) %>% rename(time = date) %>% dplyr::select(-n)
 
   stopifnot(length(unique(diff(drivers_out$time))) == 1)
 

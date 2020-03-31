@@ -10,6 +10,7 @@ include:
   - 7a_wqp_munge.yml
   - 7b_temp_merge.yml
   - 7_config_merge.yml
+  - 7_drivers_munge.yml
   - 8_viz.yml
 
 targets:

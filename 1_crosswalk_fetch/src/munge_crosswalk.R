@@ -39,6 +39,27 @@ MGLP_zip_to_sf <- function(out_ind, gdb_file, zip_ind, states){
 }
 
 
+SD_zip_to_sf <- function(out_ind, layer, zip_ind){
+
+  zip_file <- scipiper::sc_retrieve(zip_ind)
+
+  shp.path <- tempdir()
+  unzip(zip_file, exdir = shp.path)
+
+  file_dir <- as_data_file(zip_ind) %>% basename() %>% tools::file_path_sans_ext()
+  shp <- sf::st_read(file.path(shp.path, file_dir), layer = layer) %>%
+    mutate(site_id = sprintf('SDfish_%s_%s_%s', Name, County, StateID)) %>%
+    dplyr::select(site_id, geometry) %>% # why do I need to rename SHAPE to geometry??
+    st_transform(x, crs = 4326)
+
+
+  # write, post, and promise the file is posted
+  data_file <- scipiper::as_data_file(out_ind)
+  saveRDS(shp, data_file)
+  gd_put(out_ind, data_file)
+}
+
+
 
 LAGOS_zip_to_sf <- function(out_ind, layer, zip_ind, states){
 

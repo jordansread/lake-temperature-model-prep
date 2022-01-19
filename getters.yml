@@ -64,6 +64,12 @@ targets:
   1_crosswalk_fetch/out/iadnr_lakes_sf.rds:
     command: gd_get('1_crosswalk_fetch/out/iadnr_lakes_sf.rds.ind')
 
+  1_crosswalk_fetch/in/South Dakota.zip:
+    command: gd_get('1_crosswalk_fetch/in/South Dakota.zip.ind')
+
+  1_crosswalk_fetch/out/South_Dakota_sf.rds:
+    command: gd_get('1_crosswalk_fetch/out/South_Dakota_sf.rds.ind')
+
   # Shapefile download available at https://www.nd.gov/gis/apps/Download/?clipping=Full&coord=LL83&format=SHAPE&layers=NDGAMEFISH.NDGF_LAKESVW
   # Before uploading, I edited the lake id column using: `mutate(LAKE = sprintf("ndgf_%s", LAKE)) %>% rename(site_id = LAKE)`
   # Note that the other NDGF resources have some lakes that do not appear in NDGF_LAKESVW
@@ -135,6 +141,12 @@ targets:
 
   2_crosswalk_munge/out/navico_nhdhr_xwalk.rds:
     command: gd_get('2_crosswalk_munge/out/navico_nhdhr_xwalk.rds.ind')
+
+  2_crosswalk_munge/out/SD_nhdhr_intersect.rds:
+    command: gd_get('2_crosswalk_munge/out/SD_nhdhr_intersect.rds.ind')
+
+  2_crosswalk_munge/out/SD_nhdhr_xwalk.rds:
+    command: gd_get('2_crosswalk_munge/out/SD_nhdhr_xwalk.rds.ind')
 
   #### 3_params_fetch #####
 

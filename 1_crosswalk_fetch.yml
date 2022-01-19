@@ -104,6 +104,12 @@ targets:
       box_res = 5, dummy = I('2021-12-01'),
       '1_crosswalk_fetch/src/fetch_wqp_sites.R')
 
+  1_crosswalk_fetch/out/South_Dakota_sf.rds.ind:
+    command: SD_zip_to_sf(
+      out_ind = target_name,
+      layer = I("ManagedFisheries"),
+      zip_ind = '1_crosswalk_fetch/in/South Dakota.zip.ind')
+
   1_crosswalk_fetch/out/micorps_sites.xlsx.ind:
     command: fetch_micorps_sites(target_name)
 

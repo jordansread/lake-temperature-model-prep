@@ -1,0 +1,12 @@
+version: 0.3.0
+name: 1_crosswalk_fetch/out/South_Dakota_sf.rds.ind
+type: file
+hash: bef0be454dc8231d9fe78690ff3187bc
+time: 2022-01-10 19:14:52 UTC
+depends:
+  1_crosswalk_fetch/in/South Dakota.zip.ind: 0039baa1619e802ba86775090efacd7d
+fixed: ce726693a4e56aca562001e029a6797a
+code:
+  functions:
+    SD_zip_to_sf: 1b547339905554d5472a00fc99e99498
+

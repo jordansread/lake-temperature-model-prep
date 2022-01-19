@@ -1,0 +1,13 @@
+version: 0.3.0
+name: 2_crosswalk_munge/out/SD_nhdhr_intersect.rds.ind
+type: file
+hash: 20b085ca5ac88323a995609daed89385
+time: 2022-01-10 20:29:10 UTC
+depends:
+  1_crosswalk_fetch/out/South_Dakota_sf.rds.ind: bef0be454dc8231d9fe78690ff3187bc
+  1_crosswalk_fetch/out/canonical_lakes_sf.rds.ind: c85c2a6554d2495811586d7e19d80617
+fixed: cc19d9153d9c09874c982cf69a5ed746
+code:
+  functions:
+    crosswalk_poly_intersect_poly: 6c3720088bee50230b7934f111363a45
+

@@ -173,3 +173,16 @@ targets:
       points_ind_file = '1_crosswalk_fetch/out/Iowa_lake_pts_sf.rds.ind',
       points_ID_name = I("Iowa_ID"))
 
+  2_crosswalk_munge/out/SD_nhdhr_intersect.rds.ind:
+    command: crosswalk_poly_intersect_poly(
+      target_name,
+      poly1_ind_file = '1_crosswalk_fetch/out/South_Dakota_sf.rds.ind',
+      poly2_ind_file = '1_crosswalk_fetch/out/canonical_lakes_sf.rds.ind',
+      poly1_ID_name = I("SDfish_ID"),
+      crs=I(3454))
+
+  2_crosswalk_munge/out/SD_nhdhr_xwalk.rds.ind:
+    command: choose1_poly_intersect_poly(
+      target_name,
+      intersect_ind_file = '2_crosswalk_munge/out/SD_nhdhr_intersect.rds.ind',
+      poly1_ID_name = I("SDfish_ID"))
